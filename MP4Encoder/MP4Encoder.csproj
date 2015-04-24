@@ -46,6 +46,8 @@
     <Compile Include="common\Delegates.cs" />
     <Compile Include="Encoder.cs" />
     <Compile Include="common\Enums.cs" />
+    <Compile Include="ffmpeg\ffmpegJob.cs" />
+    <Compile Include="ffmpeg\ffmpegSetting.cs" />
     <Compile Include="IJob.cs" />
     <Compile Include="IEncoder.cs" />
     <Compile Include="muxer\MuxJob.cs" />

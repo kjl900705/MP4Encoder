@@ -6,3 +6,7 @@ E:\MyProjects\AVEncoder\MP4Encoder\bin\Debug\MP4Encoder.dll
 E:\MyProjects\AVEncoder\MP4Encoder\bin\Debug\MP4Encoder.pdb
 E:\MyProjects\AVEncoder\MP4Encoder\obj\Debug\MP4Encoder.dll
 E:\MyProjects\AVEncoder\MP4Encoder\obj\Debug\MP4Encoder.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4Encoder\bin\Debug\MP4Encoder.dll
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4Encoder\bin\Debug\MP4Encoder.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4Encoder\obj\Debug\MP4Encoder.dll
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4Encoder\obj\Debug\MP4Encoder.pdb

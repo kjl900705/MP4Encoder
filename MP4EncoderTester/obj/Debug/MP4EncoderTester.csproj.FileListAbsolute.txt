@@ -14,3 +14,11 @@ E:\MyProjects\AVEncoder\MP4EncoderTester\bin\Debug\MP4Encoder.pdb
 E:\MyProjects\AVEncoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.csprojResolveAssemblyReference.cache
 E:\MyProjects\AVEncoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.exe
 E:\MyProjects\AVEncoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\bin\Debug\MP4EncoderTester.exe.config
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.exe
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\bin\Debug\MP4EncoderTester.exe
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\bin\Debug\MP4EncoderTester.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\bin\Debug\MP4Encoder.dll
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\bin\Debug\MP4Encoder.pdb
+C:\Users\Canie\Documents\GitHub\MP4Encoder\MP4EncoderTester\obj\Debug\MP4EncoderTester.csprojResolveAssemblyReference.cache

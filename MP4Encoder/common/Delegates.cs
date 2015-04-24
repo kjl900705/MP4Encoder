@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MP4Encoder
 {
-    public delegate void InfoOutputDele(object sendProcess, DataReceivedEventArgs output);
+    public delegate void InfoOutputDele(object sendProcess, string output);
     public delegate void ExecuteProcessDele(Process process);
 
 }

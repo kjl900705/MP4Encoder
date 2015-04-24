@@ -13,8 +13,10 @@ namespace MP4Encoder
         private IJob _job;
         public InfoOutputDele OnInfoOutput;
 
+
         public Encoder(IJob job) {
             this._job = job;
+            this.Success = true;
         }
 
         public Thread Start() {
@@ -23,6 +25,12 @@ namespace MP4Encoder
             _encoderThread.Priority = ThreadPriority.AboveNormal;
             _encoderThread.Start();
             return _encoderThread;
+        }
+
+
+        public bool Success {
+            get;
+            set;
         }
 
         public void Stop() {
@@ -39,36 +47,45 @@ namespace MP4Encoder
 
         private void processOutputInfo(object sendProcess, DataReceivedEventArgs output) {
             if (OnInfoOutput != null)
-                OnInfoOutput(sendProcess, output);
+                OnInfoOutput(sendProcess, output.Data);
         }
 
         private void CreateEncoderProcess() {
             using (var encoderProcess = new Process()) {
-                ProcessStartInfo info = new ProcessStartInfo();
-                info.Arguments = _job.GetCommandLine();
-                info.FileName = _job.EncoderFileFullName;
-                info.UseShellExecute = false;
-                info.RedirectStandardInput = true;
-                info.RedirectStandardOutput = true;
-                info.RedirectStandardError = true;
-                info.CreateNoWindow = true;
-                encoderProcess.StartInfo = info;
-                encoderProcess.Start();
-                encoderProcess.BeginErrorReadLine();
-                encoderProcess.BeginOutputReadLine();
-                encoderProcess.EnableRaisingEvents = true;
-                encoderProcess.OutputDataReceived += new DataReceivedEventHandler(processOutputInfo);
-                encoderProcess.ErrorDataReceived += new DataReceivedEventHandler(processOutputInfo);
+                try {
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.Arguments = _job.GetCommandLine();
+                    info.FileName = _job.EncoderFileFullName;
+                    info.UseShellExecute = false;
+                    info.RedirectStandardInput = true;
+                    info.RedirectStandardOutput = true;
+                    info.RedirectStandardError = true;
+                    info.CreateNoWindow = true;
+                    encoderProcess.StartInfo = info;
 
-                if (_job.ExecuteInProcess != null) {
-                    _job.ExecuteInProcess(encoderProcess);
+                    encoderProcess.OutputDataReceived += new DataReceivedEventHandler(processOutputInfo);
+                    encoderProcess.ErrorDataReceived += new DataReceivedEventHandler(processOutputInfo);
+                    encoderProcess.Start();
+                    encoderProcess.BeginErrorReadLine();
+                    encoderProcess.BeginOutputReadLine();
+                    //encoderProcess.EnableRaisingEvents = true;
+
+                    if (_job.ExecuteInProcess != null) {
+                        _job.ExecuteInProcess(encoderProcess);
+                    }
+
+                    encoderProcess.WaitForExit();
+                    encoderProcess.Close();
+                    encoderProcess.Dispose();
+                } catch (Exception ex) {
+                    this.Success = false;
+
+                    if (OnInfoOutput != null)
+                        OnInfoOutput(null, ex.Message);
                 }
-
-                encoderProcess.WaitForExit();
-                encoderProcess.Close();
-                encoderProcess.Dispose();
             }
         }
+
 
     }
 }

@@ -35,22 +35,46 @@ namespace AVEncoderTester
 
 
         public void Encode() {
+            bool success = X246FaacEncode();
+            if (!success) {
+                DeleteTmpFiles();
+                Console.WriteLine("using x246 + faac encode video failed, we try to using ffmpeg.");
+                var job = new ffmpegJob(new ffmpegSetting(this.OrigVideo, this.Output, "255", "100", "20"));
+                var encoder = new MP4Encoder.Encoder(job) { OnInfoOutput = new InfoOutputDele((o, e) => { Console.WriteLine(e); }) };
+                encoder.Start().Join();
+                success = encoder.Success;
+            }
+            if (!success) {
+                Console.WriteLine("complete, encoded success!");
+            } else {
+                Console.WriteLine("encoded failed!");
+            }
+        }
+
+        bool X246FaacEncode() {
             var jobs = new List<IJob>{
                 new AudioJob(new AudioCodecSetting(this._aviSynthTmpFile, this._audioTmpFile, this.AudioQuality)),
                 new x264Job(new x264Setting(this._aviSynthTmpFile,this._videoTmpFile)),
                 new MuxJob(new MuxSetting(this._videoTmpFile,this._audioTmpFile,this.Output))
             };
 
-            jobs.ForEach(x => {
+            foreach (var x in jobs) {
                 Console.WriteLine("Begin to encode " + x.GetType().Name);
-                new MP4Encoder.Encoder(x) {
+                var encoder = new MP4Encoder.Encoder(x) {
                     OnInfoOutput = new InfoOutputDele((o, e) => {
-                        Console.WriteLine(e.Data);
+                        Console.WriteLine(e);
                     })
-                }.Start().Join();
+                };
+                encoder.Start().Join();
+                if (!encoder.Success) {
+                    return false;
+                }
                 Console.WriteLine("End encoding " + x.GetType().Name);
-            });
+            }
+            return true;
+        }
 
+        void DeleteTmpFiles() {
             // delete temp file
             var tmpFiles = new List<string>{
                 this._aviSynthTmpFile,

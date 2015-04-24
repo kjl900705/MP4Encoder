@@ -13,5 +13,6 @@ namespace MP4Encoder
         void Stop();
         void Pause();
         void Resume();
+        bool Success{get;set;}
     }
 }
